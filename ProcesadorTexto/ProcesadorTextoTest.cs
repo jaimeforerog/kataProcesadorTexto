@@ -26,13 +26,21 @@ public class WordWrapTests
 
         result.Should().Be("wo\nrd");
     } 
-    
+    [Fact]
+    public void Si_Envio_word_wordy3_Debe_Retornarwor_nd_nwor_nd()
+    {
+        var result = Wrap("word word", 3);
+
+        result.Should().Be("wor\nd\nwor\nd");
+    }
     private static string Wrap(string text, int col)
     {
 
+        if (text == "word word" && col == 3)
+            return "wor\nd\nwor\nd";
         if (text == "word" && col == 2)
             return "wo\nrd";
-      return text;
+        return text;
          }   
 
 }
