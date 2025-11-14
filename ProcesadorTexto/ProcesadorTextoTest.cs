@@ -1,48 +1,27 @@
-﻿using FluentAssertions;
-using Xunit.Sdk;
+﻿using AwesomeAssertions;
 
-namespace ProcesadorTexto;
+namespace WordWrap.Tests;
 
-public class ProcesadorTextoTest
+public class WordWrapTests
 {
     [Fact]
-    public void Si_ingresoholay10_Debe_Retornarhola()
+    public void Si_envioVacio_Debe_RetornarVacio()
     {
-        var texte = "hola";
-        var columna = 10;
-        var procesador = new Procesador(texte, columna);
+        var result = Wrap("", 1);
 
-        procesador.Formatear().Should().Be("hola");
-
+        result.Should().Be("");
     }
-
+ 
     [Fact]
-    public void Si_IngresoVacioy10_Debe_retornarException()
+    public void Si_EnvioThis_Debe_Retornarthis()
     {
-        var texte = "";
-        var columna = 10;
-        var caller = () => new Procesador(texte, columna);
+        var result = Wrap("this", 10);
 
-        caller.Should().ThrowExactly<InvalidOperationException>();
-    }
-}
+        result.Should().Be("this");
+    }  
+    private static string Wrap(string text, int col)
+         {
+             return "";
+         }   
 
-public class Procesador
-{
-    private readonly string _texto;
-    private readonly int _columna;
-
-    public Procesador(string texto, int columna)
-    {
-        if (string.IsNullOrEmpty(texto))
-            throw new InvalidOperationException();
-
-        _texto = texto;
-        _columna = columna;
-    }
-
-    public string Formatear()
-    {
-        return _texto;
-    }
 }
