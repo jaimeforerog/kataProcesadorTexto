@@ -34,7 +34,13 @@ public class WordWrapTests
 
         result.Should().Be("wor\nd\nwor\nd");
     }
-    
+    [Fact]
+    public void Si_Envioabcdefghijy3_Debe_Retornarabc_ndef_nghi_nj()
+    {
+        var result = Wrap("abcdefghij", 3);
+   
+        result.Should().Be("abc\ndef\nghi\nj");
+    }
 
     private static string Wrap(string text, int col)
     {
@@ -47,7 +53,7 @@ public class WordWrapTests
 
         for (int i = 0; i < tamano; i++)
         {
-            if (tananoReglon <= col - 1)
+            if (tananoReglon <= col - 1 && text[i] != ' ')
             {
                 respuesta += text[i];
                 tananoReglon++;
@@ -55,7 +61,7 @@ public class WordWrapTests
             else
             {
                 respuesta += "\n";
-                respuesta += text[i];
+                respuesta += text[i]!=' ' ? text[i]: "" ;
                 tananoReglon =0;
             }
         }
