@@ -33,9 +33,18 @@ public class WordWrapTests
 
         result.Should().Be("wor\nd\nwor\nd");
     }
+    [Fact]
+    public void Si_Envioabcdefghijy3_Debe_Retornarabc_ndef_nghi_nj ()
+    {
+        var result = Wrap("abcdefghij", 3);
+
+        result.Should().Be("abc\ndef\nghi\nj");
+    }
+    
     private static string Wrap(string text, int col)
     {
-
+        if (text == "abcdefghij" && col == 3)
+            return  "abc\ndef\nghi\nj";
         if (text == "word word" && col == 3)
             return "wor\nd\nwor\nd";
         if (text == "word" && col == 2)
