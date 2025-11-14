@@ -62,7 +62,7 @@ public class WordWrapTests
             {
                 respuesta += "\n";
                 respuesta += text[i]!=' ' ? text[i]: "" ;
-                tananoReglon =0;
+                tananoReglon =  text[i]!=' ' ? 1: 0;
             }
         }
         return respuesta;
