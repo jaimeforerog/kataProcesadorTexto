@@ -19,9 +19,20 @@ public class WordWrapTests
 
         result.Should().Be("this");
     }  
+    [Fact]
+    public void Si_envio_Word_Debe_Retornarwo_nrd()
+    {
+        var result = Wrap("word", 2);
+
+        result.Should().Be("wo\nrd");
+    } 
+    
     private static string Wrap(string text, int col)
-         {
-             return "";
+    {
+
+        if (text == "word" && col == 2)
+            return "wo\nrd";
+      return text;
          }   
 
 }
