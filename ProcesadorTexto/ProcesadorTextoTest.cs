@@ -28,13 +28,13 @@ public class WordWrapTests
         result.Should().Be("wo\nrd");
     }
 
- // [Fact]
-    // public void Si_Envio_word_wordy3_Debe_Retornarwor_nd_nwor_nd()
-    // {
-    //     var result = Wrap("word word", 3);
-    //
-    //     result.Should().Be("wor\nd\nwor\nd");
-    // }
+    [Fact]
+    public void Si_Envio_word_wordy3_Debe_Retornarwor_nd_nwor_nd()
+    {
+        var result = Wrap("word word", 3);
+
+        result.Should().Be("wor\nd\nwor\nd");
+    }
 
     // [Fact]
     // public void Si_Envioabcdefghijy3_Debe_Retornarabc_ndef_nghi_nj()
@@ -46,33 +46,33 @@ public class WordWrapTests
 
     private static string Wrap(string text, int col)
     {
-       
         var tamano = text.Length;
-       
+
         if (tamano <= col)
             return text;
-        
+
         var respuesta = "";
         var tamanoReglon = 0;
 
         for (int i = 0; i < tamano; i++)
         {
-            if (tamanoReglon < col)
+            if (tamanoReglon < col && text[i] != ' ')
             {
-                 respuesta += text[i];
-                 tamanoReglon++;
+                respuesta += text[i];
+                tamanoReglon++;
             }
             else
             {
                 respuesta += "\n";
-                respuesta += text[i];
-                tamanoReglon = 1; 
+                tamanoReglon = 0;
+                if (text[i] != ' ')
+                {
+                    respuesta += text[i];
+                    tamanoReglon = 1;
+                }
             }
-           
-           
         }
 
         return respuesta;
     }
-    
 }
