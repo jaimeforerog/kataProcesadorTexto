@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Xunit.Sdk;
 
 namespace ProcesadorTexto;
 
@@ -14,6 +15,16 @@ public class ProcesadorTextoTest
         procesador.Formatear().Should().Be("hola");
 
     }
+
+    [Fact]
+    public void Si_IngresoVacioy10_Debe_retornarException()
+    {
+        var texte = "";
+        var columna = 10;
+        var caller = () => new Procesador(texte, columna);
+
+        caller.Should().ThrowExactly<InvalidOperationException>();
+    }
 }
 
 public class Procesador
@@ -23,15 +34,15 @@ public class Procesador
 
     public Procesador(string texto, int columna)
     {
+        if (string.IsNullOrEmpty(texto))
+            throw new InvalidOperationException();
+
         _texto = texto;
         _columna = columna;
     }
 
     public string Formatear()
     {
-       
-            return _texto;
- 
-        
+        return _texto;
     }
 }
