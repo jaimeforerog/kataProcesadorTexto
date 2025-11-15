@@ -88,41 +88,50 @@ public class WordWrapTests
     {
         var tamano = text.Length;
         var respuesta = "";
-        var tananoReglon = 0;
+        var reglon = 0;
 
         if (tamano <= col)
             return text;
 
         for (int i = 0; i < tamano; i++)
         {
-            if (tananoReglon <= col - 1 && text[i] != ' ')
+            var letra = text[i];
+            if (reglon <= col - 1 && letra != ' ')
             {
-                respuesta += text[i];
-                tananoReglon++;
+                respuesta += letra;
+                reglon++;
             }
             else 
-            if (tananoReglon <= col)
+            if (reglon <= col)
             {
-                if (text[i] == ' ')
+                var salto = "\n";
+                if (letra == ' ')
                 {
-                    var longitudSiguientePalabra = 0;
-                    for (int j = i + 1; j < tamano && text[j] != ' '; j++)
-                    {
-                        longitudSiguientePalabra++;
-                    }
+                    var longitudSiguientePalabra = LongitudSiguientePalabra(text, tamano, i);
 
-                    var palabraCabe = tananoReglon + 1 + longitudSiguientePalabra <= col;
-                    respuesta += palabraCabe ? text[i] : "\n";
-                    tananoReglon = palabraCabe ? tananoReglon + 1 : 0;
+                    var palabraCabe = reglon + 1 + longitudSiguientePalabra <= col;
+                    respuesta += palabraCabe ? letra : salto;
+                    reglon = palabraCabe ? reglon + 1 : 0;
                 }
                 else
                 {
-                    respuesta += "\n" + text[i];
-                    tananoReglon = 1;
+                    respuesta += salto + letra;
+                    reglon = 1;
                 }
             }
         }
 
         return respuesta;
+    }
+
+    private static int LongitudSiguientePalabra(string text, int tamano, int i)
+    {
+        var longitudSiguientePalabra = 0;
+        for (int j = i + 1; j < tamano && text[j] != ' '; j++)
+        {
+            longitudSiguientePalabra++;
+        }
+
+        return longitudSiguientePalabra;
     }
 }
