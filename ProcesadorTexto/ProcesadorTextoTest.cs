@@ -95,18 +95,42 @@ public class WordWrapTests
 
         for (int i = 0; i < tamano; i++)
         {
-            if (tananoReglon <= col - 1 && text[i] != ' '  )
+            if (tananoReglon <= col - 1 && text[i] != ' ')
             {
                 respuesta += text[i];
                 tananoReglon++;
             }
             else
             {
-                if (tananoReglon <= col )
+                if (tananoReglon <= col)
                 {
-                    respuesta += "\n";
-                    respuesta += text[i] != ' ' ? text[i] : "";
-                    tananoReglon = text[i] != ' ' ? 1 : 0;
+                    if (text[i] == ' ')
+                    {
+               
+                        var longitudSiguientePalabra = 0;
+                        for (int j = i + 1; j < tamano && text[j] != ' '; j++)
+                        {
+                            longitudSiguientePalabra++;
+                        }
+
+                      
+                        if (tananoReglon + 1 + longitudSiguientePalabra <= col)
+                        {
+                            respuesta += text[i];
+                            tananoReglon++;
+                        }
+                        else
+                        {
+                           respuesta += "\n";
+                           tananoReglon = 0;
+                        }
+                    }
+                    else
+                    {
+                        respuesta += "\n";
+                        respuesta += text[i];
+                        tananoReglon = 1;
+                    }
                 }
             }
         }
