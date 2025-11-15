@@ -89,7 +89,8 @@ public class WordWrapTests
         var tamano = text.Length;
         var respuesta = "";
         var reglon = 0;
-
+        var salto = "\n";
+        
         if (tamano <= col)
             return text;
 
@@ -101,10 +102,8 @@ public class WordWrapTests
                 respuesta += letra;
                 reglon++;
             }
-            else 
-            if (reglon <= col)
+            else if (reglon <= col)
             {
-                var salto = "\n";
                 if (letra == ' ')
                 {
                     var longitudSiguientePalabra = LongitudSiguientePalabra(text, tamano, i);
